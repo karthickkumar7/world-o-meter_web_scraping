@@ -5,17 +5,17 @@ import { PopulationFull } from '@/types';
 import dynamic from 'next/dynamic';
 
 type Props = {
-    data1: PopulationFull[];
+    data2: PopulationFull[];
 };
 
-const PopulationLinechartTabs = ({ data1 }: Props) => {
+const ForecastLinechartTabs = ({ data2 }: Props) => {
     const LineChart = dynamic(
         () => import('@/components/country-population/line-chart')
     );
     return (
-        <Tabs defaultValue="hist" className="w-full my-8">
+        <Tabs defaultValue="fut" className="w-full my-8">
             <TabsList className="space-x-4 bg-slate-800 flex p-2">
-                <TabsTrigger value="hist">Historic Population</TabsTrigger>
+                <TabsTrigger value="fut">Future Population</TabsTrigger>
                 <TabsTrigger value="urb">Urban Population</TabsTrigger>
                 <TabsTrigger value="ycp">
                     Yearly Change of Population
@@ -24,48 +24,58 @@ const PopulationLinechartTabs = ({ data1 }: Props) => {
                 <TabsTrigger value="med">Median Age</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="hist">
+            <TabsContent value="fut">
                 <LineChart
-                    data={data1.map((dt) => ({
-                        year: dt.year,
-                        variable: dt.population,
-                    }))}
+                    data={data2
+                        .map((dt) => ({
+                            year: dt.year,
+                            variable: dt.population,
+                        }))
+                        .reverse()}
                     title="India Population (1955-2023)"
                 />
             </TabsContent>
             <TabsContent value="urb">
                 <LineChart
-                    data={data1.map((dt) => ({
-                        year: dt.year,
-                        variable: dt.urbanPopulation,
-                    }))}
+                    data={data2
+                        .map((dt) => ({
+                            year: dt.year,
+                            variable: dt.urbanPopulation,
+                        }))
+                        .reverse()}
                     title="Urban Population"
                 />
             </TabsContent>
             <TabsContent value="ycp">
                 <LineChart
-                    data={data1.map((dt) => ({
-                        year: dt.year,
-                        variable: dt.yearlyChange,
-                    }))}
+                    data={data2
+                        .map((dt) => ({
+                            year: dt.year,
+                            variable: dt.yearlyChange,
+                        }))
+                        .reverse()}
                     title="Yearly Change Of Population"
                 />
             </TabsContent>
             <TabsContent value="fert">
                 <LineChart
-                    data={data1.map((dt) => ({
-                        year: dt.year,
-                        variable: dt.fertilityRate,
-                    }))}
+                    data={data2
+                        .map((dt) => ({
+                            year: dt.year,
+                            variable: dt.fertilityRate,
+                        }))
+                        .reverse()}
                     title="India Fertility Rate"
                 />
             </TabsContent>
             <TabsContent value="med">
                 <LineChart
-                    data={data1.map((dt) => ({
-                        year: dt.year,
-                        variable: dt.medianAge,
-                    }))}
+                    data={data2
+                        .map((dt) => ({
+                            year: dt.year,
+                            variable: dt.medianAge,
+                        }))
+                        .reverse()}
                     title="Median Age"
                 />
             </TabsContent>
@@ -73,4 +83,4 @@ const PopulationLinechartTabs = ({ data1 }: Props) => {
     );
 };
 
-export default PopulationLinechartTabs;
+export default ForecastLinechartTabs;

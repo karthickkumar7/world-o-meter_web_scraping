@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
         await page.goto(URL);
 
         const data = await getDemographics(page);
-        console.log('data', data);
         await browser.close();
         return NextResponse.json(data);
     } catch (err) {

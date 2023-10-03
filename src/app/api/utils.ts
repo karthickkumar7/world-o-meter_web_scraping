@@ -5,7 +5,7 @@ const BASE_URL = 'http://localhost:3000/api';
 export const urlMapper = {
     livePopulation: BASE_URL + '/live-population',
     historicalPopulation: BASE_URL + '/historical-population',
-    foreCasePopulation: BASE_URL + '/forecase-population',
+    foreCastPopulation: BASE_URL + '/forecast-population',
     mainCitiespopulation: BASE_URL + '/main-cities-population',
     dataPoints: BASE_URL + '/datapoints',
     demographics: BASE_URL + '/demographics',

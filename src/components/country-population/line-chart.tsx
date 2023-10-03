@@ -13,7 +13,9 @@ type HistoricChartProps = {
 const HistoricChart = ({ data, title }: HistoricChartProps) => {
     return (
         <div>
-            <h4 className="my-8 text-2xl font-semibold text-white">{title}</h4>
+            <h4 className="my-8 text-2xl font-semibold text-center text-slate-200">
+                {title}
+            </h4>
             <div>
                 <LineChart
                     width={1030}

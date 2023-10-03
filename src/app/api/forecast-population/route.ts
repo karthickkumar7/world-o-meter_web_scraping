@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import puppeteer from 'puppeteer';
 import { getForecastPopulation } from '@/app/api/utils';
 
-export async function GET(request: NextRequest, route: any) {
+export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams;
         const query = searchParams.get('country');
