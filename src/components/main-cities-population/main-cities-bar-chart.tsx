@@ -17,7 +17,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 const MainCitiesBarChart = ({ data }: { data: MainCityPopulation[] }) => {
     return (
-        <div className="p-1 mt-2">
+        <div className="pl-8 mt-2">
             <BarChart
                 width={730}
                 height={580}

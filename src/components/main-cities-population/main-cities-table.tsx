@@ -10,13 +10,17 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { ReactNode } from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type MainCitiesProps = {
-    data: MainCityPopulation[];
+    mainCityPopulation: MainCityPopulation[];
     children: ReactNode;
 };
 
-const MainCitiesPopulation = ({ data, children }: MainCitiesProps) => {
+const MainCitiesPopulation = ({
+    mainCityPopulation,
+    children,
+}: MainCitiesProps) => {
     const MainCitiesBarChart = dynamic(
         () => import('./main-cities-bar-chart'),
         {
@@ -26,7 +30,7 @@ const MainCitiesPopulation = ({ data, children }: MainCitiesProps) => {
 
     return (
         <div className="w-full flex flex-col lg:flex-row">
-            <div className="w-full lg:w-[40%] p-2">
+            <ScrollArea className="w-full lg:w-[40%] h-[900px] p-2">
                 <Table className="rounded-lg bg-slate-800 text-white">
                     <TableHeader>
                         <TableRow className="text-lg font-bold">
@@ -40,7 +44,7 @@ const MainCitiesPopulation = ({ data, children }: MainCitiesProps) => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {data.map((city) => (
+                        {mainCityPopulation.map((city) => (
                             <TableRow
                                 key={city.id}
                                 className="cursor-default hover:bg-slate-600"
@@ -58,15 +62,17 @@ const MainCitiesPopulation = ({ data, children }: MainCitiesProps) => {
                         ))}
                     </TableBody>
                 </Table>
-            </div>
+            </ScrollArea>
             <section className="w-full lg:w-[60%] p-4 space-y-6">
                 {children}
 
                 <div className="lg:mt-[50px]">
-                    <h1 className="text-4xl font-bold text-white">
+                    <h1 className="text-2xl font-bold text-slate-200">
                         Top 10 cities by population
                     </h1>
-                    <MainCitiesBarChart data={data.slice(0, 10)} />
+                    <MainCitiesBarChart
+                        data={mainCityPopulation.slice(0, 10)}
+                    />
                 </div>
             </section>
         </div>

@@ -25,3 +25,9 @@ export type DemographicType = {
     infantMortality: string;
     deathsUnderAgeFive: string;
 };
+
+export type CurrentTab = 'country' | 'cities';
+export type UtilInitialState = {
+    currentTab: CurrentTab;
+    searchTerm: string;
+};

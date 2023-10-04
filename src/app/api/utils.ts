@@ -210,3 +210,23 @@ export const getDemographics = async (page: Page) => {
 
     return data;
 };
+
+export const getWorldPopulationData = async (page: Page) => {
+    const res1 = getLivePopulation(page);
+    const res2 = getMainCitiesByPopulation(page);
+    const res3 = getHistoricalPopulation(page);
+    const res4 = getForecastPopulation(page);
+    const res5 = getDataPoints(page);
+    const res6 = getDemographics(page);
+
+    const res = await Promise.all([res1, res2, res3, res4, res5, res6]);
+
+    return {
+        livePopulation: res[0],
+        mainCitiesPopulation: res[1],
+        historicalpopulation: res[2],
+        forecastpopulation: res[3],
+        dataPoints: res[4],
+        demographics: res[5],
+    };
+};

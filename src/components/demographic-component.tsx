@@ -1,5 +1,3 @@
-import React from 'react';
-
 type DemographicProps = {
     title: string;
     data: string;

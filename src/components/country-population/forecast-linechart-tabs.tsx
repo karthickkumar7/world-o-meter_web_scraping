@@ -32,7 +32,7 @@ const ForecastLinechartTabs = ({ data2 }: Props) => {
                             variable: dt.population,
                         }))
                         .reverse()}
-                    title="India Population (1955-2023)"
+                    title="Forecast Population (2025-2050)"
                 />
             </TabsContent>
             <TabsContent value="urb">

@@ -1,7 +1,9 @@
 import { Caveat } from 'next/font/google';
-import CountryPopulation from './country-population';
+import CountryLivePopulation from './country-live-population';
 import Demographics from './demographics';
-import { Suspense } from 'react';
+import HeaderTabs from './header-tabs';
+import { DemographicType } from '@/types';
+import SearchCountriesInput from './search-countries-input';
 
 const caveat = Caveat({
     subsets: ['latin'],
@@ -9,7 +11,12 @@ const caveat = Caveat({
     adjustFontFallback: true,
 });
 
-const Header = () => {
+type Props = {
+    livePopulation: string;
+    demographics: DemographicType;
+};
+
+const Header = ({ livePopulation, demographics }: Props) => {
     return (
         <header className="w-full">
             <section className="max-w-[1200px] mx-auto px-2 py-4 flex items-center justify-between text-white">
@@ -18,19 +25,14 @@ const Header = () => {
                 >
                     World Countries
                 </h1>
-                <input
-                    className="rounded-lg px-4 py-3 bg-slate-800 border-none outline-none focus:outline-slate-500 focus:shadow-lg lg:focus:w-[400px] duration-300"
-                    placeholder="Search countries..."
-                />
+                <HeaderTabs />
+                <SearchCountriesInput />
             </section>
 
             <section className="max-w-[1200px] mx-auto flex flex-col lg:flex-row items-center mt-8">
-                <Suspense fallback={<p>fetchiing population...</p>}>
-                    <CountryPopulation />
-                </Suspense>
-                <Suspense fallback={<p>fetching demographics...</p>}>
-                    <Demographics />
-                </Suspense>
+                <CountryLivePopulation livePopulation={livePopulation} />
+
+                <Demographics demographics={demographics} />
             </section>
         </header>
     );
