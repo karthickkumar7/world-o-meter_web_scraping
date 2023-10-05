@@ -14,9 +14,10 @@ const caveat = Caveat({
 type Props = {
     livePopulation: string;
     demographics: DemographicType;
+    countryName: string;
 };
 
-const Header = ({ livePopulation, demographics }: Props) => {
+const Header = ({ livePopulation, demographics, countryName }: Props) => {
     return (
         <header className="w-full">
             <section className="max-w-[1200px] mx-auto px-2 py-4 flex items-center justify-between text-white">
@@ -30,7 +31,10 @@ const Header = ({ livePopulation, demographics }: Props) => {
             </section>
 
             <section className="max-w-[1200px] mx-auto flex flex-col lg:flex-row items-center mt-8">
-                <CountryLivePopulation livePopulation={livePopulation} />
+                <CountryLivePopulation
+                    livePopulation={livePopulation}
+                    countryName={countryName}
+                />
 
                 <Demographics demographics={demographics} />
             </section>

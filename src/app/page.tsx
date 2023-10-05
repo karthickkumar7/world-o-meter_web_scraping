@@ -1,11 +1,10 @@
 import Header from '@/components/header';
 import RenderPageTabs from '@/components/render-page-tabs';
-import { store } from '@/redux/store';
 
-const Home = async () => {
+const Home = async ({ searchParams }: { searchParams: any }) => {
     const res = await fetch(
-        `http://localhost:3000/api/world-countries?country=${
-            store.getState().util.searchTerm
+        `/api/world-countries?country=${
+            Object.keys(searchParams).length ? searchParams.country : 'india'
         }`,
         { next: { revalidate: 3600 } }
     );
@@ -25,6 +24,7 @@ const Home = async () => {
                 <Header
                     livePopulation={livePopulation}
                     demographics={demographics}
+                    countryName={searchParams.country}
                 />
                 <RenderPageTabs
                     historicalpopulation={historicalpopulation}

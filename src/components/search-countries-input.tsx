@@ -1,16 +1,14 @@
 'use client';
 
-import { AppDispatch } from '@/redux/store';
-import { setSearchTerm } from '@/redux/utilSlice';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 const SearchCountriesInput = () => {
     const [srchTerm, setSrchTerm] = useState('');
-    const dispatch: AppDispatch = useDispatch();
+    const { push } = useRouter();
 
     const handler = () => {
-        dispatch(setSearchTerm(srchTerm));
+        push(`http://localhost:3000?country=${srchTerm}`);
     };
 
     return (
