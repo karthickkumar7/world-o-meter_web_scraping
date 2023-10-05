@@ -3,10 +3,10 @@ import RenderPageTabs from '@/components/render-page-tabs';
 
 const Home = async ({ searchParams }: { searchParams: any }) => {
     const res = await fetch(
-        `/api/world-countries?country=${
+        `https://world-o-meter-web-scraping-4vmpuw949-karthickkumar7.vercel.app/api/world-countries?country=${
             Object.keys(searchParams).length ? searchParams.country : 'india'
         }`,
-        { next: { revalidate: 3600 } }
+        { cache: 'no-store' }
     );
 
     if (res.ok) {
