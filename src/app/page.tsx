@@ -1,6 +1,5 @@
 import Header from '@/components/header';
 import RenderPageTabs from '@/components/render-page-tabs';
-import puppeteer from 'puppeteer';
 import { getWorldPopulationData } from './api/utils';
 import { MainCityPopulation, PopulationFull } from '@/types';
 
@@ -14,12 +13,7 @@ export const dynamic = 'force-dynamic';
 
 const getData = async (query: string) => {
     try {
-        const URL = `https://www.worldometers.info/world-population/${query}-population/`;
-        const browser = await puppeteer.launch({ headless: 'new' });
-        const page = await browser.newPage();
-        await page.goto(URL);
-        const data = await getWorldPopulationData(page);
-        await browser.close();
+        const data = await getWorldPopulationData(query);
         return { data, error: null };
     } catch (err) {
         return { data: null, error: true };

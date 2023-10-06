@@ -13,7 +13,7 @@ const caveat = Caveat({
 
 type Props = {
     livePopulation: string;
-    demographics: DemographicType;
+    demographics: DemographicType[];
     countryName: string;
 };
 

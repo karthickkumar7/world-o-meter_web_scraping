@@ -21,9 +21,9 @@ export type PopulationFull = {
 };
 
 export type DemographicType = {
-    lifeExpectancy: string;
-    infantMortality: string;
-    deathsUnderAgeFive: string;
+    title: string;
+    body: string;
+    sub: string;
 };
 
 export type CurrentTab = 'country' | 'cities';
