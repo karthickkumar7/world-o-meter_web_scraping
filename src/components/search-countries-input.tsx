@@ -9,7 +9,7 @@ const SearchCountriesInput = () => {
     const { push } = useRouter();
 
     const handler = () => {
-        push(`http://localhost:3000?country=${srchTerm}`);
+        push(`/?country=${srchTerm}`);
     };
 
     return (
