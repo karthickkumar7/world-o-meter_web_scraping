@@ -8,19 +8,27 @@ import ForecastLinechartTabs from './forecast-linechart-tabs';
 type Props = {
     historicalpopulation: PopulationFull[];
     forecastpopulation: PopulationFull[];
+    countryName: string;
 };
 
 const countriesPopulation = ({
     historicalpopulation,
     forecastpopulation,
+    countryName,
 }: Props) => {
     return (
-        <div className="max-w-[1200px] h-full mx-auto">
-            <section className="mt-8 p-2 flex flex-col">
-                <PopulationLinechartTabs data1={historicalpopulation} />
+        <div className="max-w-[1200px] h-full m-0 lg:mx-auto">
+            <section className="mt-8 p-1 lg:p-2 flex flex-col">
+                <PopulationLinechartTabs
+                    data1={historicalpopulation}
+                    countryName={countryName}
+                />
                 <HistoricPopulationTable data1={historicalpopulation} />
 
-                <ForecastLinechartTabs data2={forecastpopulation} />
+                <ForecastLinechartTabs
+                    data2={forecastpopulation}
+                    countryName={countryName}
+                />
                 <ForecastPopulationTable data2={forecastpopulation} />
             </section>
         </div>

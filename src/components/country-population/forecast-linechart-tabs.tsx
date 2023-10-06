@@ -6,9 +6,10 @@ import dynamic from 'next/dynamic';
 
 type Props = {
     data2: PopulationFull[];
+    countryName: string;
 };
 
-const ForecastLinechartTabs = ({ data2 }: Props) => {
+const ForecastLinechartTabs = ({ data2, countryName }: Props) => {
     const LineChart = dynamic(
         () => import('@/components/country-population/line-chart')
     );
@@ -32,7 +33,7 @@ const ForecastLinechartTabs = ({ data2 }: Props) => {
                             variable: dt.population,
                         }))
                         .reverse()}
-                    title="Forecast Population (2025-2050)"
+                    title={`${countryName} Forecast Population (2025-2050)`}
                 />
             </TabsContent>
             <TabsContent value="urb">
@@ -65,7 +66,7 @@ const ForecastLinechartTabs = ({ data2 }: Props) => {
                             variable: dt.fertilityRate,
                         }))
                         .reverse()}
-                    title="India Fertility Rate"
+                    title={`${countryName} Fertility Rate`}
                 />
             </TabsContent>
             <TabsContent value="med">

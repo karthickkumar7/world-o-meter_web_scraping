@@ -11,6 +11,7 @@ type Props = {
     forecastpopulation: PopulationFull[];
     mainCitiesPopulation: MainCityPopulation[];
     datapoints: string[];
+    countryName: string;
 };
 
 const RenderPageTabs = ({
@@ -18,6 +19,7 @@ const RenderPageTabs = ({
     forecastpopulation,
     mainCitiesPopulation,
     datapoints,
+    countryName,
 }: Props) => {
     const { currentTab } = useSelector((s: RootState) => s.util);
 
@@ -26,6 +28,7 @@ const RenderPageTabs = ({
             <CountryPopulation
                 historicalpopulation={historicalpopulation}
                 forecastpopulation={forecastpopulation}
+                countryName={countryName}
             />
         );
     if (currentTab === 'cities')

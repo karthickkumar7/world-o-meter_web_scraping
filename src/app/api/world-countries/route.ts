@@ -7,6 +7,8 @@ export async function GET(request: NextRequest) {
         const searchParams = request.nextUrl.searchParams;
         const query = searchParams.get('country');
 
+        console.log(query);
+
         const URL = `https://www.worldometers.info/world-population/${query}-population/`;
         const browser = await puppeteer.launch({ headless: 'new' });
         const page = await browser.newPage();
