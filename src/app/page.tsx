@@ -10,6 +10,8 @@ type Props = {
     };
 };
 
+export const dynamic = 'force-dynamic';
+
 const getData = async (query: string) => {
     try {
         const URL = `https://www.worldometers.info/world-population/${query}-population/`;
