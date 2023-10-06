@@ -1,6 +1,6 @@
 import Header from '@/components/header';
 import RenderPageTabs from '@/components/render-page-tabs';
-import { getWorldPopulationData } from './api/utils';
+import { getWorldPopulationData } from '@/app/utils';
 import { MainCityPopulation, PopulationFull } from '@/types';
 
 type Props = {
