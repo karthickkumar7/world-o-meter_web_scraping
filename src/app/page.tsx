@@ -8,10 +8,13 @@ type Props = {
 };
 
 const Home = async ({ searchParams }: Props) => {
+    if (!process.env.NEXT_PUBLIC_BASE_API_URL) return null;
+
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/world-countries?country=${
             Object.keys(searchParams).length ? searchParams.country : 'india'
-        }`
+        }`,
+        { next: { revalidate: 3600 } }
     );
 
     if (res.ok) {
