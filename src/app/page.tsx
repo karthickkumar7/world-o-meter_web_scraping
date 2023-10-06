@@ -10,7 +10,7 @@ type Props = {
     };
 };
 
-export async function getData(query: string) {
+const getData = async (query: string) => {
     try {
         const URL = `https://www.worldometers.info/world-population/${query}-population/`;
         const browser = await puppeteer.launch({ headless: 'new' });
@@ -22,7 +22,7 @@ export async function getData(query: string) {
     } catch (err) {
         return { data: null, error: true };
     }
-}
+};
 
 const Home = async ({ searchParams }: Props) => {
     const { data, error } = await getData(
