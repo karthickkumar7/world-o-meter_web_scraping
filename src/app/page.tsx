@@ -1,5 +1,8 @@
 import Header from '@/components/header';
 import RenderPageTabs from '@/components/render-page-tabs';
+import puppeteer from 'puppeteer';
+import { getWorldPopulationData } from './api/utils';
+import { MainCityPopulation, PopulationFull } from '@/types';
 
 type Props = {
     searchParams: {
@@ -7,46 +10,61 @@ type Props = {
     };
 };
 
-const Home = async ({ searchParams }: Props) => {
-    if (!process.env.NEXT_PUBLIC_BASE_API_URL) return null;
+export async function getData(query: string) {
+    try {
+        const URL = `https://www.worldometers.info/world-population/${query}-population/`;
+        const browser = await puppeteer.launch({ headless: 'new' });
+        const page = await browser.newPage();
+        await page.goto(URL);
+        const data = await getWorldPopulationData(page);
+        await browser.close();
+        return { data, error: null };
+    } catch (err) {
+        return { data: null, error: true };
+    }
+}
 
-    const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/world-countries?country=${
-            Object.keys(searchParams).length ? searchParams.country : 'india'
-        }`,
-        { next: { revalidate: 3600 } }
+const Home = async ({ searchParams }: Props) => {
+    const { data, error } = await getData(
+        Object.keys(searchParams).length ? searchParams.country : 'india'
     );
 
-    if (res.ok) {
+    if (error) return <ErrorFetchingdata />;
+
+    if (data) {
         const {
-            livePopulation,
-            mainCitiesPopulation,
-            historicalpopulation,
-            forecastpopulation,
             dataPoints,
             demographics,
-        } = await res.json();
+            forecastpopulation,
+            historicalpopulation,
+            livePopulation,
+            mainCitiesPopulation,
+        } = data;
 
         if (!dataPoints.length) return <ErrorFetchingdata />;
 
         return (
             <main className="w-full h-screen overflow-y-auto bg-gradient-to-b from-blue-600 to-purple-600">
                 <Header
-                    livePopulation={livePopulation}
+                    livePopulation={livePopulation as string}
                     demographics={demographics}
                     countryName={searchParams.country}
                 />
                 <RenderPageTabs
-                    historicalpopulation={historicalpopulation}
-                    forecastpopulation={forecastpopulation}
-                    mainCitiesPopulation={mainCitiesPopulation}
+                    historicalpopulation={
+                        historicalpopulation as PopulationFull[]
+                    }
+                    forecastpopulation={forecastpopulation as PopulationFull[]}
+                    mainCitiesPopulation={
+                        mainCitiesPopulation as MainCityPopulation[]
+                    }
                     datapoints={dataPoints}
                     countryName={searchParams.country}
                 />
             </main>
         );
     } else {
-        return <ErrorFetchingdata />;
+        return null;
     }
 };
 
