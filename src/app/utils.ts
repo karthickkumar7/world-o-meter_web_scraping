@@ -3,7 +3,8 @@ import * as cheerio from 'cheerio';
 
 const getPopulation = async (country: string) => {
     const res = await fetch(
-        `https://www.worldometers.info/world-population/${country}-population/`
+        `https://www.worldometers.info/world-population/${country}-population/`,
+        { next: { revalidate: 2592000 } }
     );
     const html = await res.text();
     const $ = cheerio.load(html);
@@ -17,7 +18,8 @@ const getPopulation = async (country: string) => {
 
 const getMainCities = async (country: string) => {
     const res = await fetch(
-        `https://www.worldometers.info/world-population/${country}-population/`
+        `https://www.worldometers.info/world-population/${country}-population/`,
+        { next: { revalidate: 86400 } }
     );
     const html = await res.text();
 
@@ -70,7 +72,8 @@ const getPopulationFull = async (
         'body > div.container > div:nth-child(3) > div > div > div:nth-child(16) > table > tbody > tr';
 
     const res = await fetch(
-        `https://www.worldometers.info/world-population/${country}-population/`
+        `https://www.worldometers.info/world-population/${country}-population/`,
+        { next: { revalidate: 86400 } }
     );
     const html = await res.text();
     const $ = cheerio.load(html);
@@ -136,7 +139,8 @@ const getPopulationFull = async (
 
 const getDataPoints = async (country: string) => {
     const res = await fetch(
-        `https://www.worldometers.info/world-population/${country}-population/`
+        `https://www.worldometers.info/world-population/${country}-population/`,
+        { next: { revalidate: 86400 } }
     );
     const html = await res.text();
     const $ = cheerio.load(html);
@@ -159,7 +163,8 @@ const getDataPoints = async (country: string) => {
 
 const getDemographics = async (country: string) => {
     const res = await fetch(
-        `https://www.worldometers.info/world-population/${country}-population/`
+        `https://www.worldometers.info/world-population/${country}-population/`,
+        { next: { revalidate: 86400 } }
     );
     const html = await res.text();
     const $ = cheerio.load(html);
