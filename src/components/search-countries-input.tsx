@@ -9,7 +9,7 @@ const SearchCountriesInput = () => {
     const { push } = useRouter();
 
     const handler = () => {
-        push(`/?country=${srchTerm}`);
+        push(`/?country=${srchTerm.toLowerCase()}`);
     };
 
     return (
